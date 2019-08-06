@@ -834,7 +834,7 @@
                         },
                         {
                             "name": "DEVICE_LIFECYCLE_CONNECTION_STRING",
-                            "value": "[listKeys(resourceId('Microsoft.ServiceBus/namespaces/AuthorizationRules',variables('serviceBus2NamespaceName'),variables('serviceBus2ReadRuleName')),'2015-08-01').primaryConnectionString]"
+                            "value": "[listKeys(resourceId('Microsoft.ServiceBus/namespaces/queues/authorizationRules',variables('serviceBus2NamespaceName'),variables('serviceBus2QueueName'),variables('serviceBus2ReadRuleName')),'2015-08-01').primaryConnectionString]"
                         },
                         {
                             "name": "EVENT_HUB_ROUTER_INPUT",
@@ -884,7 +884,7 @@
                 },
                 "parameters": {
                     "solutionPrefix": {
-                        "value": "[parameters('random')]"
+                        "value": "[parameters('initials')]"
                     }
                 }
             }
@@ -905,7 +905,7 @@
                 },
                 "parameters": {
                     "alarmSolutionPrefix": {
-                        "value": "[parameters('random')]"
+                        "value": "[parameters('initials')]"
                     },
                     "gitUsername": {
                         "value": "[parameters('gitUsername')]"

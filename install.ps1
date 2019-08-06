@@ -26,7 +26,7 @@ Get-ChildItem Env:AZURE*
 Get-ChildItem Env:PROJECT*
 
 if ( !$Initials) { $Initials = "cat" }
-if ( !$ResourceGroupName) { $ResourceGroupName = "$Initials-iot-loriat" }
+if ( !$ResourceGroupName) { $ResourceGroupName = "$Initials-iot-loriot" }
 
 
 ###############################
