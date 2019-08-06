@@ -21,12 +21,6 @@
             }
         }
     },
-    "variables": {
-       
-    },
-    "resources": [
-        
-          
-            
-    ]
+    "variables": {},
+    "resources": []
 }
