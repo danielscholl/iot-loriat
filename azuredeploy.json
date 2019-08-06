@@ -135,7 +135,7 @@
         "hostingPlanName": "[concat('appplan', parameters('random'))]",
         "functionAppName": "[concat('function', parameters('random'))]",
         "deviceLifecycleImportTimer": "0 */5 * * * *",
-        "gitRepoUrl": "[concat('https://github.com/',parameters('gitUsername'),'/AzureSolutionTemplate.git')]",
+        "gitRepoUrl": "[concat('https://github.com/',parameters('gitUsername'),'/iot-loriot.git')]",
         "gitBranch": "master",
         
         "streamAnalyticsJobName": "[concat('streamanalytics', parameters('random'))]",
@@ -879,7 +879,7 @@
             "properties": {
                 "mode": "Incremental",
                 "templateLink": {
-                    "uri": "[concat('https://raw.githubusercontent.com/',parameters('gitUsername'),'/AzureSolutionTemplate/',variables('gitBranch'),'/helperTemplates/callsetupfunction.json')]",
+                    "uri": "[concat('https://raw.githubusercontent.com/',parameters('gitUsername'),'/iot-loriot/',variables('gitBranch'),'/helperTemplates/callsetupfunction.json')]",
                     "contentVersion": "1.0.0.0"
                 },
                 "parameters": {
@@ -900,7 +900,7 @@
             "properties": {
                 "mode": "Incremental",
                 "templateLink": {
-                    "uri": "[Concat('https://raw.githubusercontent.com/',parameters('gitUsername'),'/AzureSolutionTemplate/',variables('gitBranch'),'/helperTemplates/alarmdeploy',parameters('alarmDeploy'),'.json')]",
+                    "uri": "[Concat('https://raw.githubusercontent.com/',parameters('gitUsername'),'/iot-loriot/',variables('gitBranch'),'/helperTemplates/alarmdeploy',parameters('alarmDeploy'),'.json')]",
                     "contentVersion": "1.0.0.0"
                 },
                 "parameters": {
