@@ -90,7 +90,7 @@
                 "true",
                 "false"
             ],
-            "defaultValue": "true",
+            "defaultValue": "false",
             "metadata": {
                 "description": "Deploy Power BI live output from Stream Analytics to visualise data in near realtime."
             }
@@ -101,7 +101,7 @@
                 "true",
                 "false"
             ],
-            "defaultValue": "true",
+            "defaultValue": "false",
             "metadata": {
                 "description": "Deploy an alarming pipeline sending notification if the temperature grow above certain level."
             }
@@ -134,21 +134,17 @@
 
         "hostingPlanName": "[concat('appplan', parameters('random'))]",
         "functionAppName": "[concat('function', parameters('random'))]",
-        "deviceLifecycleImportTimer": "0 */5 * * * *",
         "gitRepoUrl": "[concat('https://github.com/',parameters('gitUsername'),'/iot-loriot.git')]",
         "gitBranch": "master",
-        
+
         "streamAnalyticsJobName": "[concat('streamanalytics', parameters('random'))]",
-        "pbiGroupName": "My Workspace",
-        "pbiGroupID": "aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee",
-        "pbiUserDisplayName": "Anon Ymous",
-        "pbiUserLoginName": "example@domain.com",
         "alarmQuery": "[if(equals(parameters('alarmDeploy'),'true'),'SELECT * \r\n INTO \r\n [alarmServiceBus] \r\n FROM \r\n [EventHub] \r\n WHERE  metadata.alarm = ''true'' \r\n ',' ')]",
         "powerBiQuery": "[if(equals(parameters('powerBIDeploy'),'true'),'SELECT MessageGUID, raw.EUI as eui, decoded.temperature as temperature, decoded.humidity as humidity, raw.ts as ts, EventEnqueuedUtcTime as time \r\n INTO \r\n [PowerBI] \r\n FROM \r\n [EventHub] \r\n WHERE metadata.sensorDecoder =''SensorDecoderWeather'' \r\n ',' ')]",
         "streamAnalyticsQuery": "[Concat('SELECT raw.EUI as eui, * \r\n INTO \r\n [CosmosDB] \r\n FROM \r\n [EventHub] \r\n SELECT MessageGUID, raw.EUI as eui, decoded.temperature as temperature, decoded.humidity as humidity, raw.ts as ts, EventEnqueuedUtcTime as time \r\n INTO \r\n [SQLDB] \r\n FROM \r\n [EventHub] \r\n WHERE  metadata.sensorDecoder = ''SensorDecoderWeather'' \r\n ',variables('powerBiQuery'),variables('alarmQuery'))]",
-        
-        "functionAlarmingAppName": "[concat('alarmfunction', parameters('random'))]",
-        "logicAppName": "[concat('logicapp', parameters('random'))]",
+        "pbiGroupName": "My Workspace",
+        "pbiGroupID": "aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee",
+        "pbiUserDisplayName": "Daniel Scholl",
+        "pbiUserLoginName": "example@domain.com"
     },
     "resources": [
         {
@@ -826,7 +822,7 @@
                         },
                         {
                             "name": "DEVICE_LIFECYCLE_IMPORT_TIMER",
-                            "value": "[variables('deviceLifecycleImportTimer')]"
+                            "value": "0 */5 * * * *"
                         },
                         {
                             "name": "DEVICE_LIFECYCLE_QUEUE_NAME",
@@ -869,7 +865,7 @@
             }
         },
         {
-            "comments": "## Function App Deployment ##",
+            "comments": "## Deploy Function ##",
             "name": "CallSetupFunction",
             "type": "Microsoft.Resources/deployments",
             "apiVersion": "2015-01-01",
@@ -884,13 +880,13 @@
                 },
                 "parameters": {
                     "solutionPrefix": {
-                        "value": "[parameters('initials')]"
+                        "value": "[parameters('random')]"
                     }
                 }
             }
         },
         {
-            "comments": "## Function App Deployment ## ",
+            "comments": "## Deploy Function ## ",
             "name": "AlarmDeployment",
             "type": "Microsoft.Resources/deployments",
             "apiVersion": "2015-01-01",

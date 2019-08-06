@@ -2,11 +2,13 @@
     "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
     "contentVersion": "1.0.0.0",
     "parameters": {
-        "alarmSolutionPrefix": {
-            "type": "string",
+        "random": {
+            "type": "int",
             "metadata": {
-                "description": "Prefix used in resource names. Should be unique enough since this ends up being used also in domain names."
-            }
+              "description": "4 Digit Random Integer"
+            },
+            "minValue": 100,
+            "maxValue": 9999
         },
         "gitUsername": {
             "type": "string",
@@ -22,19 +24,19 @@
         }
     },
     "variables": {
-        "connectionServiceBusName": "[concat(parameters('alarmSolutionPrefix'),'connectionservicebus')]",
-        "alarmConsumerGroupName": "[concat(parameters('alarmSolutionPrefix'),'alarmconsumergroup')]",
-        "serviceBusNamespaceName": "[concat(parameters('alarmSolutionPrefix'),'alarmservicebusnamespace')]",
-        "serviceBusQueueName": "[concat(parameters('alarmSolutionPrefix'),'alarmservicebusqueuename')]",
-        "serviceBusReadRuleName": "[concat(parameters('alarmSolutionPrefix'),'alarmservicebusreadrule')]",
-        "serviceBusWriteRuleName": "[concat(parameters('alarmSolutionPrefix'),'alarmservicebuswriterule')]",
-        "serviceBusSubscription": "[concat(parameters('alarmSolutionPrefix'),'alarmservicebussubscription')]",
-        "functionAlarmingAppName": "[concat(parameters('alarmSolutionPrefix'), 'alarmfunction')]",
-        "logicAppName": "[concat(parameters('alarmSolutionPrefix'),'logicapp')]",
-        "storageAccountName": "[concat(parameters('alarmSolutionPrefix'), 'storage')]",
+        "cosmosdbName": "[concat('cosmosdb', parameters('random'))]",
+        "serviceBusNamespaceName": "[concat('alarmbus', parameters('random'))]",
+        "serviceBusQueueName": "alarmqueue",
+        "serviceBusReadRuleName": "alarmreadrule",
+        "serviceBusSubscription": "alarmbussubscription",
+        "storageAccountName": "[concat('storage', parameters('random'))]",
         "storageAccountId": "[concat(resourceGroup().id, '/providers/', 'Microsoft.Storage/storageAccounts/', variables('storageAccountName'))]",
-        "cosmosdbName": "[concat(parameters('alarmSolutionPrefix'),'cosmosdb')]",
-        "hostingPlanName": "[concat(parameters('alarmSolutionPrefix'), 'plan')]",
+
+        "hostingPlanName": "[concat('appplan', parameters('random'))]",
+        "connectionServiceBusName": "[concat('connectionservicebus', parameters('random'))]",
+        "alarmConsumerGroupName": "alarm",
+        "functionAlarmingAppName": "[concat('alarmfunction', parameters('random'))]",
+        "logicAppName": "[concat('logicapp', parameters('random'))]",
         "gitUsername": "[parameters('gitUsername')]",
         "gitRepoUrl": "[concat('https://github.com/',variables('gitUsername'),'/AzureSolutionTemplate.git')]",
         "gitBranch": "[parameters('gitBranch')]"
