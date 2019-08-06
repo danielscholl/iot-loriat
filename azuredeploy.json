@@ -879,7 +879,7 @@
                     "contentVersion": "1.0.0.0"
                 },
                 "parameters": {
-                    "solutionPrefix": {
+                    "random": {
                         "value": "[parameters('random')]"
                     }
                 }
