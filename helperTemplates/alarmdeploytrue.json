@@ -34,11 +34,10 @@
 
         "hostingPlanName": "[concat('appplan', parameters('random'))]",
         "connectionServiceBusName": "[concat('connectionservicebus', parameters('random'))]",
-        "alarmConsumerGroupName": "alarm",
         "functionAlarmingAppName": "[concat('alarmfunction', parameters('random'))]",
         "logicAppName": "[concat('logicapp', parameters('random'))]",
         "gitUsername": "[parameters('gitUsername')]",
-        "gitRepoUrl": "[concat('https://github.com/',variables('gitUsername'),'/AzureSolutionTemplate.git')]",
+        "gitRepoUrl": "[concat('https://github.com/',variables('gitUsername'),'/iot-loriot.git')]",
         "gitBranch": "[parameters('gitBranch')]"
     },
     "resources": [
