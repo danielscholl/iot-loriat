@@ -1,0 +1,19 @@
+﻿SELECT raw.EUI as eui, *
+INTO
+    [CosmosDB]
+FROM
+    [EventHub]
+
+SELECT MessageGUID, raw.EUI as eui, decoded.temperature as temperature, decoded.humidity as humidity, raw.ts as ts
+INTO
+    [SQLDB]
+FROM
+    [EventHub]
+WHERE  metadata.sensorDecoder = 'SensorDecoderWeather'
+
+SELECT MessageGUID, raw.EUI as eui, decoded.temperature as temperature, decoded.humidity as humidity, raw.ts as ts, EventEnqueuedUtcTime as time
+INTO
+    [PowerBI]
+FROM
+    [EventHub]
+WHERE  metadata.sensorDecoder = 'SensorDecoderWeather'
