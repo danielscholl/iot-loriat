@@ -2,11 +2,13 @@
     "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
     "contentVersion": "1.0.0.0",
     "parameters": {
-        "alarmSolutionPrefix": {
-            "type": "string",
+        "random": {
+            "type": "int",
             "metadata": {
-                "description": "Prefix used in resource names. Should be unique enough since this ends up being used also in domain names."
-            }
+              "description": "4 Digit Random Integer"
+            },
+            "minValue": 100,
+            "maxValue": 9999
         },
         "gitUsername": {
             "type": "string",

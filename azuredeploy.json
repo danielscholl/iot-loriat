@@ -900,8 +900,8 @@
                     "contentVersion": "1.0.0.0"
                 },
                 "parameters": {
-                    "alarmSolutionPrefix": {
-                        "value": "[parameters('initials')]"
+                    "random": {
+                        "value": "[parameters('random')]"
                     },
                     "gitUsername": {
                         "value": "[parameters('gitUsername')]"
